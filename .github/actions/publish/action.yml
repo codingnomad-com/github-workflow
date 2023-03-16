@@ -4,6 +4,11 @@ name: Publish
 
 description: 'Publish package to npmjs.org'
 
+inputs:
+  npm_token:
+    required: true
+    description: 'Access token for publishing packages to npm'
+
 runs:
   using: 'composite'
 
@@ -25,4 +30,4 @@ runs:
       run: npm publish
       shell: bash
       env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        NODE_AUTH_TOKEN: ${{ inputs.npm_token }}
