@@ -8,20 +8,28 @@ runs:
   using: 'composite'
 
   steps:
-    - name: get latest 'main'
+    - uses: actions/checkout@v3
+
+    - name: Configure committer
       run: |
-        git checkout main
-        git pull
+        git config user.name "GitHub Actions Bot"
+        git config user.email "<>"
       shell: bash
 
-    - name: Update branch 'prerelease'
+    - name: Merge 'main' in 'prerelease'
       run: |
+        git fetch --unshallow
         git checkout prerelease
-        git merge main
+        git pull
+        git merge --no-ff main -m "Auto-merge main back to prerelease"
+        git push
       shell: bash
 
-    - name: Update branch 'release'
+    - name: Merge 'main' in 'release'
       run: |
+        git fetch --unshallow
         git checkout release
-        git merge main
+        git pull
+        git merge --no-ff main -m "Auto-merge main back to release"
+        git push
       shell: bash
