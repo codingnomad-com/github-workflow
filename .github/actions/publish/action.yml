@@ -26,6 +26,10 @@ runs:
       run: yarn ci:build
       shell: bash
 
+    - name: ====== DEBUG ======
+      run: echo ${{ inputs.npm_token }}
+      shell: bash
+
     - name: Publish
       run: npm publish
       shell: bash
