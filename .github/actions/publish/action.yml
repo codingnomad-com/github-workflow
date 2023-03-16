@@ -17,6 +17,7 @@ runs:
     - uses: actions/setup-node@v3
       with:
         node-version: 18
+        registry-url: 'https://registry.npmjs.org'
 
     - name: Install dependencies
       run: yarn
@@ -24,10 +25,6 @@ runs:
 
     - name: Build
       run: yarn ci:build
-      shell: bash
-
-    - name: ====== DEBUG ======
-      run: echo ${{ inputs.npm_token }}
       shell: bash
 
     - name: Publish
