@@ -29,7 +29,7 @@ runs:
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ inputs.personal_access_token }}
-        commit-message: Update 'release'
+        commit-message: Update 'release' ~sync
         title: Update 'release'
         body: |
           Keep branch 'release' in sync with 'main'
@@ -57,7 +57,7 @@ runs:
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ inputs.personal_access_token }}
-        commit-message: Update 'prerelease'
+        commit-message: Update 'prerelease' ~sync
         title: Update 'prerelease'
         body: |
           Keep branch 'prerelease' in sync with 'main'
