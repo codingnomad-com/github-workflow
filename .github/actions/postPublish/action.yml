@@ -16,14 +16,14 @@ runs:
         git config user.email "<>"
       shell: bash
 
-    - name: Merge 'main' in 'prerelease'
-      run: |
-        git fetch --unshallow
-        git checkout prerelease
-        git pull
-        git merge --no-ff main -m "Auto-merge main back to prerelease"
-        git push
-      shell: bash
+    # - name: Merge 'main' in 'prerelease'
+    #   run: |
+    #     git fetch --unshallow
+    #     git checkout prerelease
+    #     git pull
+    #     git merge --no-ff main -m "Auto-merge main back to prerelease"
+    #     git push
+    #   shell: bash
 
     - name: Merge 'main' in 'release'
       run: |
