@@ -30,7 +30,7 @@ runs:
       shell: bash
 
     - name: Semantic versioning
-      run: standard-version
+      run: yarn ci:release
       shell: bash
 
     - name: Tag release
