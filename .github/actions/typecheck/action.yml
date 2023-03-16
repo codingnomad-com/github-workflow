@@ -1,0 +1,22 @@
+# typecheck/action.yml
+
+name: Typecheck
+
+description: 'Performs typecheck'
+
+runs:
+  using: 'composite'
+
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: Install dependencies
+      run: yarn
+      shell: bash
+
+    - name: TypeScript Typecheck
+      run: yarn tsc
+      shell: bash

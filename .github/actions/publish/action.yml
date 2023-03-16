@@ -1,0 +1,28 @@
+# publish/action.yml
+
+name: Publish
+
+description: 'Publish package to npmjs.org'
+
+runs:
+  using: 'composite'
+
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install dependencies
+      run: yarn
+      shell: bash
+
+    - name: Build
+      run: yarn ci:build
+      shell: bash
+
+    - name: Publish
+      run: npm publish
+      shell: bash
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

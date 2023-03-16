@@ -1,0 +1,32 @@
+# release/action.yml
+
+name: Release
+
+description: 'Release version'
+
+runs:
+  using: 'composite'
+
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: Install dependencies
+      run: yarn
+      shell: bash
+
+    - name: Configure committer
+      run: |
+        git config user.name "GitHub Actions Bot"
+        git config user.email "<>"
+      shell: bash
+
+    - name: Semantic versioning
+      run: yarn ci:release
+      shell: bash
+
+    - name: Tag release
+      run: yarn ci:release:tags
+      shell: bash

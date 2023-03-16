@@ -1,0 +1,22 @@
+# eslint/action.yml
+
+name: ESLint
+
+description: 'Performs linting check'
+
+runs:
+  using: 'composite'
+
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: Install dependencies
+      run: yarn
+      shell: bash
+
+    - name: ESLint
+      run: yarn lint
+      shell: bash
