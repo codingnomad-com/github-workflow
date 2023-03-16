@@ -4,6 +4,14 @@ name: Post publish
 
 description: 'Clean repository'
 
+inputs:
+  personal_access_token:
+    required: true
+    description: 'GitHub personal access token'
+  github_token:
+    required: true
+    description: 'GitHub token'
+
 runs:
   using: 'composite'
 
@@ -16,26 +24,19 @@ runs:
         git config user.email "<>"
       shell: bash
 
-    # - name: Merge 'main' in 'prerelease'
-    #   run: |
-    #     git fetch --unshallow
-    #     git checkout prerelease
-    #     git pull
-    #     git merge --no-ff main -m "Auto-merge main back to prerelease"
-    #     git push
-    #   shell: bash
-
     - name: Create Pull Request
       id: cpr
-      uses:
-        peter-evans/create-pull-request@v3
-        # token: ${{ secrets.PAT }}
+      uses: peter-evans/create-pull-request@v3
+      with:
+        token: ${{ inputs.personal_access_token }}
+        branch: main
+        base: release
 
     - name: Enable Pull Request Automerge
       if: steps.cpr.outputs.pull-request-operation == 'created'
       uses: peter-evans/enable-pull-request-automerge@v2
       with:
-        # token: ${{ secrets.PAT }}
+        token: ${{ inputs.personal_access_token }}
         pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
         merge-method: squash
 
@@ -43,7 +44,7 @@ runs:
       if: steps.cpr.outputs.pull-request-operation == 'created'
       uses: juliangruber/approve-pull-request-action@v2
       with:
-        # github-token: ${{ secrets.GITHUB_TOKEN }}
+        github-token: ${{ inputs.github_token }}
         number: ${{ steps.cpr.outputs.pull-request-number }}
 
     - name: Merge 'main' in 'release'
