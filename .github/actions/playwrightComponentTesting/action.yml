@@ -1,0 +1,33 @@
+# playwrightComponentTesting/action.yml
+
+name: Playwright Component Testing
+
+description: 'Performs Playwright component testing'
+
+runs:
+  using: 'composite'
+
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install dependencies
+      run: yarn
+      shell: bash
+
+    - name: Install Playwright Browsers
+      run: yarn playwright install --with-deps
+      shell: bash
+
+    - name: Run Playwright tests
+      run: yarn playwright test -c playwright-ct.config.ts
+      shell: bash
+
+    - uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
