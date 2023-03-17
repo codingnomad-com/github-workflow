@@ -1,0 +1,28 @@
+# storybook/action.yml
+
+name: Storybook
+
+description: 'Publishes Storybook documentation'
+
+runs:
+  using: 'composite'
+
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install dependencies
+      run: yarn
+      shell: bash
+
+    - name: Build Storybook
+      run: build-storybook --out-dir docs
+      # run: yarn doc:build
+      shell: bash
+
+    - name: Build Storybook
+      # run: yarn doc:deploy
+      run: gh-pages -d docs
+      shell: bash

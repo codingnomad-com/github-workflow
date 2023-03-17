@@ -2,7 +2,7 @@
 
 name: Sync Release
 
-description: 'Clean repository'
+description: 'Merges changes from main in release'
 
 inputs:
   personal_access_token:

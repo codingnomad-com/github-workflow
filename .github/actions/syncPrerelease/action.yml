@@ -2,7 +2,7 @@
 
 name: Sync Prerelease
 
-description: 'Clean repository'
+description: 'Merges changes from main in prerelease'
 
 inputs:
   personal_access_token:
