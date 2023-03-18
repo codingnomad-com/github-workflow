@@ -19,10 +19,8 @@ runs:
 
     - name: Build Storybook
       run: build-storybook --out-dir docs
-      # run: yarn doc:build
       shell: bash
 
     - name: Build Storybook
-      # run: yarn doc:deploy
       run: gh-pages -d docs
       shell: bash
