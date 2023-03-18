@@ -33,7 +33,7 @@ runs:
       shell: bash
 
     - name: Build Storybook
-      run: yarn ci:doc:deploy
-      shell: bash
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        token: ${{ inputs.github_token }}
+        github_token: ${{ inputs.github_token }}
+        publish_dir: docs
