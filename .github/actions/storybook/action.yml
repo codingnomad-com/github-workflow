@@ -4,6 +4,11 @@ name: Storybook
 
 description: 'Publishes Storybook documentation'
 
+inputs:
+  github_token:
+    required: true
+    description: 'GitHub token'
+
 runs:
   using: 'composite'
 
@@ -30,3 +35,5 @@ runs:
     - name: Build Storybook
       run: yarn ci:doc:deploy
       shell: bash
+      with:
+        token: ${{ inputs.github_token }}
